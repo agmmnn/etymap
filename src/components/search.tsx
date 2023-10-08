@@ -16,7 +16,7 @@ export function SearchComponent({
         placeholder={word}
         onChange={(e) => setSearchValue(e.target.value)}
         onKeyDown={(e) => (e.key === "Enter" ? getSearch() : null)}
-        className="bg-background w-fit rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        className="w-fit rounded-md border-gray-300 bg-background focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
       />
 
       <Button type="submit" onClick={searchValue ? getSearch : null}>
@@ -27,8 +27,8 @@ export function SearchComponent({
         Random
       </Button>
 
-      <ModeToggle />
-      <Language />
+      {/* <ModeToggle />
+      <Language /> */}
     </div>
   )
 }
