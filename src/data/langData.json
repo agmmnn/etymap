@@ -1,0 +1,125 @@
+{
+  "Proto-Indo-European": {
+    "url": "https://glottolog.org/resource/languoid/id/indo1319",
+    "latitude": 48,
+    "longitude": 39
+  },
+
+  "Proto-Germanic": {
+    "url": "https://glottolog.org/resource/languoid/id/germ1287",
+    "latitude": 54,
+    "longitude": 10
+  },
+  "Proto-West Germanic": {
+    "url": "https://glottolog.org/resource/languoid/id/indo1319",
+    "latitude": 54,
+    "longitude": 10
+  },
+
+  "Proto-Italic": {
+    "url": "https://glottolog.org/resource/languoid/id/ital1284",
+    "latitude": 41.9026,
+    "longitude": 12.4502
+  },
+  "Vulgar Latin": {
+    "url": "https://glottolog.org/resource/languoid/id/vulg1234",
+    "latitude": 41.9026,
+    "longitude": 12.4502
+  },
+  "New Latin": {
+    "url": "https://glottolog.org/resource/languoid/id/vulg1234",
+    "latitude": 41.9026,
+    "longitude": 12.4502
+  },
+  "Late Latin": {
+    "url": "https://glottolog.org/resource/languoid/id/late1252",
+    "latitude": 41.9026,
+    "longitude": 12.4502
+  },
+  "Medieval Latin": {
+    "url": "https://glottolog.org/resource/languoid/id/late1252",
+    "latitude": 41.9026,
+    "longitude": 12.4502
+  },
+
+  "Anglo-Norman": {
+    "url": "https://glottolog.org/resource/languoid/id/angl1258",
+    "latitude": 51.65,
+    "longitude": -1.11
+  },
+
+  "Middle French": {
+    "url": "https://glottolog.org/resource/languoid/id/midd1316",
+    "latitude": 48.8,
+    "longitude": 1.11
+  },
+  "Frankish": {
+    "url": "https://glottolog.org/resource/languoid/id/angl1258",
+    "latitude": 48.8,
+    "longitude": 1.11
+  },
+  "Ancient Greek": {
+    "url": "https://glottolog.org/resource/languoid/id/gree1276",
+    "latitude": 39.8155,
+    "longitude": 21.9129
+  },
+  "Greek": {
+    "url": "https://glottolog.org/resource/languoid/id/gree1276",
+    "latitude": 39.8155,
+    "longitude": 21.9129
+  },
+  "Proto-Hellenic": {
+    "url": null,
+    "latitude": 39.8155,
+    "longitude": 21.9129
+  },
+  "Koine Greek": {
+    "url": null,
+    "latitude": 39.8155,
+    "longitude": 21.9129
+  },
+
+  "Arabic": {
+    "url": "https://glottolog.org/resource/languoid/id/arab1395",
+    "latitude": 28,
+    "longitude": 42
+  },
+
+  "Hebrew": {
+    "url": "https://glottolog.org/resource/languoid/id/hebr1245",
+    "latitude": 31,
+    "longitude": 35
+  },
+  "Aramaic": {
+    "url": "https://glottolog.org/resource/languoid/id/aram1259",
+    "latitude": 31,
+    "longitude": 35
+  },
+
+  "Ottoman Turkish": {
+    "url": "https://glottolog.org/resource/languoid/id/otto1234",
+    "latitude": 41.01,
+    "longitude": 28.98
+  },
+  "Proto-Turkic": {
+    "url": "https://glottolog.org/resource/languoid/id/turk1311",
+    "latitude": 47,
+    "longitude": 87
+  },
+
+  "Old Persian": {
+    "url": "hhttps://glottolog.org/resource/languoid/id/oldp1254",
+    "latitude": 30.06,
+    "longitude": 52.7
+  },
+  "Middle Persian": {
+    "url": "https://glottolog.org/resource/languoid/id/pahl1241",
+    "latitude": 30.06,
+    "longitude": 52.7
+  },
+  "Persian": {
+    "url": "https://glottolog.org/resource/languoid/id/pahl1241",
+    "latitude": 30.06,
+    "longitude": 52.7
+  }
+}
