@@ -4,9 +4,20 @@ import { useEffect, useRef, useState } from "react"
 
 import { MapComponent } from "@/components/map"
 
+const preWords = [
+  { word: "amphora", id: 3788 },
+  { word: "ancient", id: 1022 },
+  { word: "galaxy", id: 61512 },
+  { word: "horse", id: 1315 },
+  { word: "microbe", id: 98323 },
+  { word: "planet", id: 14346 },
+  { word: "diamond", id: 46840 },
+]
+
 export default function Home() {
-  const [wordId, setWordId] = useState(0)
-  const [word, setWord] = useState("word")
+  const [wordId, setWordId] = useState<number | undefined>()
+  const [word, setWord] = useState("")
+  const [preWord, setPreWord] = useState<string | undefined>()
   const [data, setData] = useState<DataObject | undefined>()
   const [nodes, setNodes] = useState([])
   const [searchValue, setSearchValue] = useState("")
@@ -24,10 +35,14 @@ export default function Home() {
   }
 
   const getData = () => {
+    let firstNode, firstWord
     setLoading(true) // Set loading to true before fetching data
     fetchData(`/api/word/${wordId}`, (data: DataObject) => {
+      firstNode = Object.keys(data.data[2])[0]
+      firstWord = data.data[1].words[firstNode].word
+      setWord(firstWord)
       setData(data)
-      setLoading(false) // Set loading to false after data is fetched
+      setLoading(false)
     })
   }
 
@@ -38,6 +53,7 @@ export default function Home() {
         console.log(data.word)
         setWordId(data.id)
         setWord(data.word)
+        setPreWord(null)
       }
     )
   }
@@ -48,6 +64,7 @@ export default function Home() {
       const autoCompleteData = data.auto_complete_data[0]
       setWordId(autoCompleteData["_id"])
       setWord(autoCompleteData["word"])
+      setPreWord(null)
       console.log(autoCompleteData["_id"], autoCompleteData["word"])
       console.log(
         `https://api.etymologyexplorer.com/prod/get_trees?ids[]=${autoCompleteData["_id"]}`
@@ -56,12 +73,16 @@ export default function Home() {
   }
 
   useEffect(() => {
-    getData()
-    console.log(mapRef)
+    const preWord = preWords[Math.floor(Math.random() * preWords.length)]
+    setWordId(preWord.id)
+    setWord(preWord.word)
+    setPreWord(preWord.word)
   }, [])
 
   useEffect(() => {
-    getData()
+    if (wordId) {
+      getData()
+    }
   }, [wordId])
 
   useEffect(() => {
@@ -101,6 +122,7 @@ export default function Home() {
             searchValue={searchValue}
             getSearch={getSearch}
             getrandom={getrandom}
+            preWord={preWord}
           />
         </div>
       </main>
