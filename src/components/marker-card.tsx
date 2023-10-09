@@ -1,6 +1,36 @@
 import { toGreeklish } from "greek-utils"
 
+import { Badge } from "@/components/ui/badge"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
 export function MarkerCard({ item }) {
+  return (
+    <Card className="max-w-[12em] justify-center text-center">
+      <CardHeader className="p-2 pb-0 font-serif">
+        <CardTitle>
+          <Badge className="rounded-full">{item.language}</Badge>
+        </CardTitle>
+        <CardDescription className="font-semibold text-current">
+          {item.word}
+          {item.language === "Ancient Greek"
+            ? " (" + toGreeklish(item.word) + ")"
+            : null}
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="p-2 text-[.6rem] text-muted-foreground">
+        <p>{item.definitions}</p>
+      </CardContent>
+    </Card>
+  )
+}
+export function MarkerCard2({ item }) {
   return (
     <div
       className="mx-auto "
