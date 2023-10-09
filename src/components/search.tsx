@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { IBM_Plex_Sans } from "next/font/google"
 import Image from "next/image"
+import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 
@@ -22,26 +23,30 @@ export function SearchComponent({
 }) {
   return (
     <div className="absolute flex w-full flex-row items-center justify-center space-x-1 p-2">
-      {preWord ? (
-        <Image
-          src={`/assets/${preWord}.svg`}
-          width={42}
-          height={42}
-          alt="EtyMap"
-        />
-      ) : (
-        <EmojioneV1WorldMap width={42} height={42} />
-      )}
-
-      <h1
-        className={cn(
-          ibmPlexSans.className,
-          "flex select-none flex-row text-2xl"
-        )}
+      <Link
+        href="/"
+        className="flex select-none flex-row items-center text-2xl"
       >
-        <span className="text-primary">Ety</span>
-        <span>Map</span>
-      </h1>
+        {preWord ? (
+          <Image
+            src={`/assets/${preWord}.svg`}
+            width={42}
+            height={42}
+            alt="EtyMap"
+          />
+        ) : (
+          <EmojioneV1WorldMap width={42} height={42} />
+        )}
+        <h1
+          className={cn(
+            ibmPlexSans.className,
+            "flex select-none flex-row text-2xl"
+          )}
+        >
+          <span className="text-primary">Ety</span>
+          <span>Map</span>
+        </h1>
+      </Link>
 
       <Input
         placeholder={word}
