@@ -1,32 +1,35 @@
 import { NextResponse } from "next/server"
 import langData from "@/data/langData.json"
 
-const fetchEtyexpData = async (id: number) => {
-  const etyexpResp = await fetch(
+// Function to fetch etymology data based on ID
+const fetchEtymologyData = async (id: number) => {
+  const response = await fetch(
     `https://api.etymologyexplorer.com/prod/get_trees?ids[]=${id}`
   )
-  const etyexpData = await etyexpResp.json()
-  return etyexpData
+  const data = await response.json()
+  return data
 }
 
-const fetchLangLocation = async (lang: string) => {
-  const resp = await fetch(
-    `https://glottolog.org/glottolog?search=${lang.replace("Proto-", "")}`,
+// Function to fetch Glottolog location URL for a language
+const fetchLanguageLocationURL = async (language: string) => {
+  const response = await fetch(
+    `https://glottolog.org/glottolog?search=${language.replace("Proto-", "")}`,
     {
       method: "GET",
       redirect: "manual",
     }
   )
 
-  const headers = resp.headers
-  const location = headers.get("location")
-  return location
+  const headers = response.headers
+  const locationURL = headers.get("location")
+  return locationURL
 }
 
-const fetchGlottoData = async (url) => {
+// Function to fetch Glottolog data
+const fetchGlottologData = async (url: string) => {
   try {
-    const resp = await fetch(`${url}.json`)
-    const data = await resp.json()
+    const response = await fetch(`${url}.json`)
+    const data = await response.json()
     return data
   } catch (error) {
     return { latitude: null, longitude: null }
@@ -41,31 +44,37 @@ export async function GET(request: Request, { params }) {
   }
 
   try {
-    const etyexpData = await fetchEtyexpData(id)
+    // Fetch etymology data
+    const etymologyData = await fetchEtymologyData(id)
 
-    const langNames = Object.keys(etyexpData[1].words).map(
-      (item) => etyexpData[1].words[item].language_name
+    // Extract unique language names from etymology data
+    const languageNames = Object.keys(etymologyData[1].words).map(
+      (item) => etymologyData[1].words[item].language_name
     )
-    const uniqueLangNames = Array.from(new Set(langNames))
+    const uniqueLanguageNames = Array.from(new Set(languageNames))
 
-    const langsGlotto = await Promise.all(
-      uniqueLangNames.map(fetchLangLocation)
+    // Fetch Glottolog location URLs for each language
+    const languageLocationURLs = await Promise.all(
+      uniqueLanguageNames.map(fetchLanguageLocationURL)
     )
-    const langsLoc = await Promise.all(
-      langsGlotto.map((url, index) => fetchGlottoData(url))
+
+    // Fetch Glottolog data for each language location and map to language_data
+    const languageData = await Promise.all(
+      languageLocationURLs.map((url, index) => fetchGlottologData(url))
     ).then((results) =>
       results.reduce((acc, data, index) => {
-        const lang = uniqueLangNames[index]
-        acc[lang] = {
-          url: langsGlotto[index],
-          latitude: data.latitude || (langData[lang]?.latitude ?? null),
-          longitude: data.longitude || (langData[lang]?.longitude ?? null),
+        const language = uniqueLanguageNames[index]
+        acc[language] = {
+          url: languageLocationURLs[index],
+          latitude: data.latitude || (langData[language]?.latitude ?? null),
+          longitude: data.longitude || (langData[language]?.longitude ?? null),
         }
         return acc
       }, {})
     )
 
-    return NextResponse.json({ data: etyexpData, lang_data: langsLoc })
+    // Return etymology data and language location data
+    return NextResponse.json({ data: etymologyData, lang_data: languageData })
   } catch (error) {
     return NextResponse.error()
   }
